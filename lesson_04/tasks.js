@@ -15,7 +15,8 @@
     const rain = Math.round(Math.random() * (1 - 0) + 0);
     if (rain === 1) {
         console.log("Пошёл дождь. Возьмите зонт!");
-    } else if (rain === 0) {
+    } 
+    if (rain === 0) {
         console.log("Дождя нет!");
     }
 }
@@ -32,43 +33,42 @@
 // Введите кол-во баллов по информатике: 95
 // Поздравляю, вы поступили на бюджет!
 
-{
-    const greetings = alert("Привет Артур!");
-    let totalResult = 0;
-    let mathResult = +prompt("Введите кол-во баллов по математике:");
-    if (Number.isNaN(mathResult)) {
-        alert("Артур! Должно быть число!");
-        mathResult = +prompt("Введите кол-во баллов по математике:");
-        if (Number.isNaN(mathResult)) {
-            alert("Артур! Должно быть число!");
-            mathResult = +prompt("Введите кол-во баллов по математике:");
-        }
-    }
-    let langResult = +prompt("Введите кол-во баллов по русскому языку:");
-    if (Number.isNaN(langResult)) {
-        alert("Артур! Должно быть число!");
-        langResult = +prompt("Введите кол-во баллов по русскому языку:");
-        if (Number.isNaN(langResult)) {
-            alert("Артур! Должно быть число!");
-            langResult = +prompt("Введите кол-во баллов по русскому языку:");
-        }
-    }
-    let infoResult = +prompt("Введите кол-во баллов по информатике:");
-    if (Number.isNaN(infoResult)) {
-        alert("Артур! Должно быть число!");
-        infoResult = +prompt("Введите кол-во баллов по информатике:");
-        if (Number.isNaN(infoResult)) {
-            alert("Артур! Должно быть число!");
-            infoResult = +prompt("Введите кол-во баллов по информатике:");
-        }
-    }
-    totalResult = mathResult + langResult + infoResult;
-    if (totalResult >= 256) {
-        alert("Поздравляю, Артур, вы поступили на бюджет!");
-    } else {
-        alert("Артур, вы не поступили на бюджет! Может в следующий раз, иди учись!",);
-    }
-}
+// {
+//     const greetings = alert("Привет Артур!");
+//     let mathResult = +prompt("Введите кол-во баллов по математике:");
+//     if (Number.isNaN(mathResult)) {
+//         alert("Артур! Должно быть число!");
+//         mathResult = +prompt("Введите кол-во баллов по математике:");
+//         if (Number.isNaN(mathResult)) {
+//             alert("Артур! Должно быть число!");
+//             mathResult = +prompt("Введите кол-во баллов по математике:");
+//         }
+//     }
+//     let langResult = +prompt("Введите кол-во баллов по русскому языку:");
+//     if (Number.isNaN(langResult)) {
+//         alert("Артур! Должно быть число!");
+//         langResult = +prompt("Введите кол-во баллов по русскому языку:");
+//         if (Number.isNaN(langResult)) {
+//             alert("Артур! Должно быть число!");
+//             langResult = +prompt("Введите кол-во баллов по русскому языку:");
+//         }
+//     }
+//     let infoResult = +prompt("Введите кол-во баллов по информатике:");
+//     if (Number.isNaN(infoResult)) {
+//         alert("Артур! Должно быть число!");
+//         infoResult = +prompt("Введите кол-во баллов по информатике:");
+//         if (Number.isNaN(infoResult)) {
+//             alert("Артур! Должно быть число!");
+//             infoResult = +prompt("Введите кол-во баллов по информатике:");
+//         }
+//     }
+//     const totalResult = mathResult + langResult + infoResult;
+//     if (totalResult >= 256) {
+//         alert("Поздравляю, Артур, вы поступили на бюджет!");
+//     } else {
+//         alert("Артур, вы не поступили на бюджет! Может в следующий раз, иди учись!",);
+//     }
+// }
 
 // ﻿Четвёртая задача:
 // ✔ Выполняем в файле tasks.js
@@ -87,7 +87,8 @@
     if (result % 2 === 0) {
         alert("Получите ваши деньги!");
         console.log("Получите ваши деньги!");
-    } else {
+    } 
+    else {
         alert("Не возможно! Минимальная купюра 100");
         console.log("Не возможно! Минимальная купюра 100");
     }

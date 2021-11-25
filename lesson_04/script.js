@@ -9,19 +9,15 @@
 
 {
     const productTitle = prompt("Наименование товара");
-    let productCategory = "";
-    let totalAmount = 0;
 
     let productCount = Number(prompt("Количество товара"));
 
     if (Number.isNaN(productCount)) {
         alert("Вы ввели не корректные данные! Должно быть число!");
         productCount = Number(prompt("Количество товара"));
-    } else {
-        productCategory = prompt("Категория товара");
-    }
+    } 
 
-    productCategory = prompt("Категория товара");
+    const productCategory = prompt("Категория товара");
 
     let productPrice = Number(prompt("Цена товара"));
 
@@ -29,7 +25,7 @@
         alert("Вы ввели не корректные данные! Должно быть число!");
         productPrice = Number(prompt("Цена товара"));
     }
-    totalAmount = productPrice * productCount;
+    const totalAmount = productPrice * productCount;
 
     console.log(`
         Нименование товара: ${productTitle}
