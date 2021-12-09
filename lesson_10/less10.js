@@ -24456,15 +24456,16 @@ const listIPv4 = [
   "10.0.32.20",
 ];
 
-console.log("listIPv4: ", listIPv4.length);
+console.log("listIPv4 - length: ", listIPv4.length);
 
 const getUniqueNum = (arr) => {
   const uniq = new Set(arr);
 
-  let uniqArray = [];
+  const uniqLength = uniq.size
+  // uniq.forEach((num) => uniqArray.push(num));
+  
+  return console.log('uniqLength: ', uniqLength);
 
-  uniq.forEach((num) => uniqArray.push(num));
-    return console.log("uniqArray: ", uniqArray.length);
 };
 
 getUniqueNum(listIPv4);
