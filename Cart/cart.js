@@ -41,87 +41,90 @@
 // Выводит в консоль JSON строку из массива items и на следующей строке выводит общую стоимость корзины
 // Для проверки работы функционала добавить 3 или более товаров в корзину
 // После вызвать метод print для вывода информации в консоль
+{
+    const cart = {
+        items: [],
+        count: 0,
 
-const cart = {
-    items: [],
-    count: 0,
+        get totalPrice() {
+            return this.calculateItemPrice();
+        },
 
-    get totalPrice() {
-        return this.calculateItemPrice();
-    },
+        set totalPrice(val) {},
 
-    set totalPrice(val) {},
+        add(title, price, count) {
+            const getItems = () => {
+                title = prompt("Вевдите название товара");
+                price = +prompt("Вевдите цену товара");
 
-    add(title, price, count) {
-        const getItems = () => {
-            title = prompt("Вевдите название товара");
-            price = +prompt("Вевдите цену товара");
+                if (Number.isNaN(price)) {
+                    alert("Введите цифру!");
+                    return (price = +prompt("Вевдите цену товара"));
+                }
 
-            if (Number.isNaN(price)) {
-                alert("Введите цифру!");
-                return (price = +prompt("Вевдите цену товара"));
-            }
+                count = +prompt("Вевдите количество товара");
 
-            count = +prompt("Вевдите количество товара");
+                if (Number.isNaN(count)) {
+                    alert("Введите цифру!");
+                    return (count = +prompt("Вевдите количество товара"));
+                }
 
-            if (Number.isNaN(count)) {
-                alert("Введите цифру!");
-                return (count = +prompt("Вевдите количество товара"));
-            }
+                this.items.push({ title, price, count });
 
-            this.items.push({ title, price, count });
+                confirm("Добавить еще товары в корзину")
+                    ? getItems()
+                    : alert("Ok!");
+            };
 
-            confirm("Добавить еще товары в корзину")
-                ? getItems()
-                : alert("Ok!");
-        };
+            this.calculateItemPrice();
+            this.increaseCount();
+            getItems();
+        },
 
-        this.calculateItemPrice();
-        this.increaseCount();
-        getItems();
-    },
+        increaseCount() {
+            let tottaCount = 0;
+            this.items.forEach((item) => (tottaCount += item.count));
+            this.count = tottaCount;
+        },
 
-    increaseCount() {
-        let tottaCount = 0;
-        this.items.forEach((item) => (tottaCount += item.count));
-        this.count = tottaCount;
-    },
+        calculateItemPrice() {
+            let totalPrice = 0;
+            this.items.forEach(
+                (item) => (totalPrice += item.price * item.count),
+            );
+            this.totalPrice = totalPrice;
+            return totalPrice;
+        },
 
-    calculateItemPrice() {
-        let totalPrice = 0;
-        this.items.forEach((item) => (totalPrice += item.price * item.count));
-        this.totalPrice = totalPrice;
-        return totalPrice;
-    },
+        clear() {
+            const clearAll = () => {
+                (this.items = []), (this.totalPrice = 0), (this.count = 0);
+                console.log(this.print());
+            };
+            confirm("Очистить корзину?") ? clearAll() : alert("Красавчик!");
+        },
 
-    clear() {
-        const clearAll = () => {
-            (this.items = []), (this.totalPrice = 0), (this.count = 0);
-            console.log(this.print());
-        };
-        confirm("Очистить корзину?") ? clearAll() : alert("Красавчик!");
-    },
-
-    print() {
-        this.items.map((item) => {
-            return console.log(`
+        print() {
+            this.items.map((item) => {
+                return console.log(`
             ДОБАВЛЕННО В КОРЗИНУ:
             товар ${item.title}
             общаяя сумма ${item.price * item.count}
             `);
-        });
+            });
 
-        const myObjStr = JSON.stringify(cart.items);
-        console.log(myObjStr);
+            const myObjStr = JSON.stringify(cart.items);
+            console.log(myObjStr);
 
-        console.log(`
+            console.log(`
         Общее количество товаров: ${this.count}
         Общая сумма заказа: ${this.totalPrice}
         `);
-    },
-};
+        },
+    };
 
-cart.add();
-cart.increaseCount();
-cart.print();
-cart.clear();
+    cart.add();
+    cart.increaseCount();
+    cart.print();
+    cart.clear();
+}
