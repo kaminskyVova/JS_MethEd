@@ -50,7 +50,9 @@
             return this.calculateItemPrice();
         },
 
-        set totalPrice(val) {},
+        set totalPrice(val) {
+            this.totalPrice = val
+        },
 
         add(title, price, count) {
             const getItems = () => {
@@ -92,7 +94,6 @@
             this.items.forEach(
                 (item) => (totalPrice += item.price * item.count),
             );
-            this.totalPrice = totalPrice;
             return totalPrice;
         },
 
