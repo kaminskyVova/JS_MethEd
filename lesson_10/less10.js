@@ -24459,13 +24459,9 @@ const listIPv4 = [
 console.log("listIPv4 - length: ", listIPv4.length);
 
 const getUniqueNum = (arr) => {
-  const uniq = new Set(arr);
+  const uniq = Array.from(new Set(arr));
 
-  const uniqLength = uniq.size
-  // uniq.forEach((num) => uniqArray.push(num));
-  
-  return console.log('uniqLength: ', uniqLength);
-
+  return console.log("uniqLength: ", uniq.length);
 };
 
 getUniqueNum(listIPv4);
