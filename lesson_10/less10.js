@@ -24461,7 +24461,10 @@ console.log("listIPv4 - length: ", listIPv4.length);
 const getUniqueNum = (arr) => {
   const uniq = Array.from(new Set(arr));
 
-  return console.log("uniqLength: ", uniq.length);
+  const uniq = new Set(arr)
+
+  return `"uniqLength: ",${[...uniq.values()].length}`;
+
 };
 
-getUniqueNum(listIPv4);
+console.log(getUniqueNum(listIPv4));
