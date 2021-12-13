@@ -48,8 +48,6 @@
     discount: 0,
 
     set discount_val(str) {
-      // const promo = prompt('Введите промокод');
-      // confirm('У вас есть промокод?') ? promo : alert('ok');
       if (str === 'METHED') {
         this.discount = 15;
       }
@@ -146,10 +144,6 @@
         `);
     },
   };
-
-  // cart.discount_val = confirm('У вас есть промокод?') ?
-  //   prompt('Введите промокод') :
-  //   alert('ok');
 
   cart.add();
   cart.increaseCount();
