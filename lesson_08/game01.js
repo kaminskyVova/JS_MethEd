@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // Создайте файл game01.js
 // Написать простой игровой бот, который умеет следующее:
@@ -11,30 +11,30 @@
 // если пользователь нажимает “Отмена”, то игра заканчивается.
 
 {
-    const getStartGame = () => {
-        let userNumber = +prompt("Загадайте число от 1 до 100");
-        const correctNumber = 33;
+  const getStartGame = () => {
+    let userNumber = +prompt('Загадайте число от 1 до 100');
+    const correctNumber = 33;
 
-        if (Number.isNaN(userNumber)) {
-            alert("Введи число!");
-            userNumber = +prompt("Загадайте число от 1 до 100");
-        }
+    if (Number.isNaN(userNumber)) {
+      alert('Введи число!');
+      userNumber = +prompt('Загадайте число от 1 до 100');
+    }
 
-        if (userNumber > correctNumber) {
-            alert("Меньше!");
-            userNumber = +prompt("ввести новый вариант от 1 до 100");
-        }
+    if (userNumber > correctNumber) {
+      alert('Меньше!');
+      userNumber = +prompt('ввести новый вариант от 1 до 100');
+    }
 
-        if (userNumber < correctNumber) {
-            alert("Больше!");
-            userNumber = +prompt("ввести новый вариант от 1 до 100");
-        }
+    if (userNumber < correctNumber) {
+      alert('Больше!');
+      userNumber = +prompt('ввести новый вариант от 1 до 100');
+    }
 
-        if (userNumber === correctNumber) {
-            alert("Правильно!");
-            confirm("Еще разок?") ? getStartGame() : alert("Ну ладно");
-        }
-    };
+    if (userNumber === correctNumber) {
+      alert('Правильно!');
+      confirm('Еще разок?') ? getStartGame() : alert('Ну ладно');
+    }
+  };
 
-    getStartGame();
+  getStartGame();
 }

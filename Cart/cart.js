@@ -45,6 +45,18 @@
   const cart = {
     items: [],
     count: 0,
+    discount: 0,
+
+    set discount_val(str) {
+      // const promo = prompt('Введите промокод');
+      // confirm('У вас есть промокод?') ? promo : alert('ok');
+      if (str === 'METHED') {
+        this.discount = 15;
+      }
+      if (str === 'NEWYEAR') {
+        this.discount = 21;
+      }
+    },
 
     get totalPrice() {
       return this.calculateItemPrice();
@@ -74,6 +86,10 @@
         this.items.push({title, price, count});
 
         confirm('Добавить еще товары в корзину') ? getItems() : alert('Ok!');
+
+        this.discount_val = confirm('У вас есть промокод?') ?
+        prompt('Введите промокод') :
+        alert('ok');
       };
 
       this.calculateItemPrice();
@@ -89,13 +105,24 @@
 
     calculateItemPrice() {
       let totalPrice = 0;
+      let sum = 0;
       this.items.forEach((item) => (totalPrice += item.price * item.count));
+      console.log('totalPrice: ', totalPrice);
+
+      if (this.discount === 21) {
+        sum = (totalPrice / 100) * 21;
+        totalPrice -= sum;
+      }
+      if (this.discount === 15) {
+        sum = (totalPrice / 100) * 15;
+        totalPrice -= sum;
+      }
       return totalPrice;
     },
 
     clear() {
       const clearAll = () => {
-        (this.items = []), (this.totalPrice = 0), (this.count = 0);
+        (this.items = []), (this.count = 0);
         console.log(this.print());
       };
       confirm('Очистить корзину?') ? clearAll() : alert('Красавчик!');
@@ -119,6 +146,10 @@
         `);
     },
   };
+
+  // cart.discount_val = confirm('У вас есть промокод?') ?
+  //   prompt('Введите промокод') :
+  //   alert('ok');
 
   cart.add();
   cart.increaseCount();
