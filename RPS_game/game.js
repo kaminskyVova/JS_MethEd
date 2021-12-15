@@ -15,51 +15,50 @@
 
   const botFigure = getBotRandomFigure(FIGURES_RUS);
 
+  // * выбор игрока
+  const getUserFigure = () => {
+    let choice = prompt('Что вы выбрали?');
+
+    if (choice === null) {
+      const exit = confirm('Вы уверены что не хотите играть?');
+
+      if (exit) {
+        alert('Ok');
+        alert(`Результат игр: 
+                Сыгранно игр: ${totalGameCount}
+                Побед Бота: ${botWinCount}
+                Побед Игрока: ${userWinCount}
+                Ничьих: ${drawCount}
+            `);
+      } else {
+        getGame();
+      }
+    }
+
+    // !!! если нажали отменить
+
+    if (choice != null) {
+      choice.trim().toLowerCase();
+
+      if (choice[0] === 'н') choice = 'ножницы';
+      if (choice[0] === 'к') choice = 'камень';
+      if (choice[0] === 'б') choice = 'бумага';
+
+      // * неверный ввод
+      if (choice[0] != 'н' && choice[0] != 'б' && choice[0] != 'к') {
+        alert(`
+        Неверный ввод! 
+        Вы ввели ${choice},
+        а нужно: 'камень' или 'ножницы' или 'бумага'`);
+        getGame();
+      }
+      return choice;
+    }
+  };
+
   // * игра
   const getGame = () => {
     totalGameCount++;
-
-    // * выбор игрока
-    const getUserFigure = () => {
-      // let choice = prompt('Что вы выбрали?').trim().toLowerCase();
-      let choice = prompt('Что вы выбрали?');
-
-      if (choice === null) {
-        const exit = confirm('Вы уверены что не хотите играть?');
-
-        if (exit) {
-          alert('Ok');
-          alert(`Результат игр: 
-                  Сыгранно игр: ${totalGameCount}
-                  Побед Бота: ${botWinCount}
-                  Побед Игрока: ${userWinCount}
-                  Ничьих: ${drawCount}
-              `);
-        } else {
-          getGame();
-        }
-      }
-
-      // !!! если нажали отменить
-
-      if (choice != null) {
-        choice.trim().toLowerCase();
-
-        if (choice[0] === 'н') choice = 'ножницы';
-        if (choice[0] === 'к') choice = 'камень';
-        if (choice[0] === 'б') choice = 'бумага';
-
-        // * неверный ввод
-        if (choice[0] != 'н' && choice[0] != 'б' && choice[0] != 'к') {
-          alert(`
-          Неверный ввод! 
-          Вы ввели ${choice},
-          а нужно: 'камень' или 'ножницы' или 'бумага'`);
-          getGame();
-        }
-        return choice;
-      }
-    };
 
     const userFigure = getUserFigure();
 
