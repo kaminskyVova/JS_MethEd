@@ -1,8 +1,8 @@
 'use strict';
 
-// const startGame = window.RPS();
+const startGame = window.RPS();
 // console.log('startGame: ', startGame);
-// startGame()
+startGame()
 
 // const getLangChoiceAndStartGame = () => {
 //   const langChoice = prompt('Выберети язык игры. RUS или ENG').trim().toUpperCase();
