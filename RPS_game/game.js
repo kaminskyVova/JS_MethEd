@@ -34,9 +34,8 @@
           Неверный ввод! 
           Вы ввели ${choice},
           а нужно: 'камень' или 'ножницы' или 'бумага'`);
-          getUserFigure();
+          getGame();
         }
-        getUserFigure();
         return choice;
       };
   
@@ -140,6 +139,8 @@
                   Побед Игрока: ${userWinCount}
                   Ничьих: ${drawCount}
               `);
+
+        totalGameCount = botWinCount = userWinCount = drawCount = 0;
       }
     };
     getGame();
