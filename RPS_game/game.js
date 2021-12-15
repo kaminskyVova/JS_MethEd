@@ -73,7 +73,7 @@
         `);
     }
 
-    if (botFigure[0] === 'н' && userFigure[0] === 'н') {
+    if (botFigure[0] === userFigure[0]) {
       drawCount++;
       alert(`
         Бот: ${botFigure}
@@ -103,15 +103,6 @@
         `);
     }
 
-    if (botFigure[0] === 'к' && userFigure[0] === 'к') {
-      drawCount++;
-      alert(`
-        Бот: ${botFigure}
-        Игрок: ${userFigure}
-        Ничья!
-        `);
-    }
-
     if (botFigure[0] === 'к' && userFigure[0] === 'б') {
       userWinCount++;
       alert(`
@@ -129,15 +120,6 @@
         Бот: ${botFigure}
         Игрок: ${userFigure}
         Победил Бот!
-        `);
-    }
-
-    if (botFigure[0] === 'б' && userFigure[0] === 'б') {
-      drawCount++;
-      alert(`
-        Бот: ${botFigure}
-        Игрок: ${userFigure}
-        Ничья!
         `);
     }
 
@@ -162,7 +144,6 @@
                   Побед Игрока: ${userWinCount}
                   Ничьих: ${drawCount}
               `);
-
       totalGameCount = botWinCount = userWinCount = drawCount = 0;
     }
   };
