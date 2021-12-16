@@ -2,6 +2,9 @@
 
 (() => {
   const FIGURES_RUS = ['камень', 'ножницы', 'бумага'];
+  const FIGURES_ENG = ['stone', 'scissors', 'paper'];
+  let userFigureNum = 0
+  let botFigureNum = 0
   let totalGameCount = 0;
   let userWinCount = 0;
   let botWinCount = 0;
@@ -10,13 +13,23 @@
   // * рандомный ход бота
   const getBotRandomFigure = (arr) => {
     const random = Math.floor(Math.random() * arr.length);
+    if(arr[random] === 'камень' || arr[random] === 'stone') {
+      botFigureNum = 1
+    }
+    if(arr[random] === 'ножницы' || arr[random] === 'scissors') {
+      botFigureNum = 2
+    }
+    if(arr[random] === 'бумага' || arr[random] === 'paper') {
+      botFigureNum = 3
+    }
     return arr[random];
   };
 
   const botFigure = getBotRandomFigure(FIGURES_RUS);
+  console.log('botFigure: ', botFigure);
 
   // * выбор игрока
-  const getUserFigure = () => {
+  const getUserFigure = (lang = 'RUS') => {
     let choice = prompt('Что вы выбрали?');
 
     if (choice === null) {
@@ -31,7 +44,7 @@
                 Ничьих: ${drawCount}
             `);
       } else {
-        getGame();
+        getGame(lang);
       }
     }
 
@@ -40,9 +53,18 @@
     if (choice != null) {
       choice.trim().toLowerCase();
 
-      if (choice[0] === 'н') choice = 'ножницы';
-      if (choice[0] === 'к') choice = 'камень';
-      if (choice[0] === 'б') choice = 'бумага';
+      if (choice[0] === 'н') {
+        choice = 'ножницы'
+        userFigureNum = 2;
+      };
+      if (choice[0] === 'к') {
+        choice = 'камень'
+        userFigureNum = 1
+      };
+      if (choice[0] === 'б') {
+        choice = 'бумага'
+        userFigureNum = 3
+      };
 
       // * неверный ввод
       if (choice[0] != 'н' && choice[0] != 'б' && choice[0] != 'к') {
@@ -50,30 +72,88 @@
         Неверный ввод! 
         Вы ввели ${choice},
         а нужно: 'камень' или 'ножницы' или 'бумага'`);
-        getGame();
+        getGame(lang);
       }
       return choice;
     }
+
+    // !!! English
+    // if (lang === 'ENG') {
+    //   let choice = prompt('What your choice?');
+
+    //   if (choice === null) {
+    //     const exit = confirm(`Are you sure you don't want to play?`);
+  
+    //     if (exit) {
+    //       alert('Ok');
+    //       alert(`Games result: 
+    //               Games played: ${totalGameCount}
+    //               Bot's wings: ${botWinCount}
+    //               User's wings: ${userWinCount}
+    //               Draws: ${drawCount}
+    //           `);
+    //     } else {
+    //       getGame(lang);
+    //     }
+    //   }
+  
+    //   // !!! если нажали отменить
+  
+    //   if (choice != null) {
+    //     choice.trim().toLowerCase();
+  
+    //     if (choice[0] === 's' && choice[1] === 'c') {
+    //       choice = 'scissors'
+    //       userFigureNum = 2;
+    //     };
+    //     if (choice[0] === 's' && choice[1] === 't') {
+    //       choice = 'stone'
+    //       userFigureNum = 1
+    //     };
+    //     if (choice[0] === 'p') {
+    //       choice = 'paper'
+    //       userFigureNum = 3
+    //     };
+  
+    //     // * неверный ввод
+    //     if (choice[0] != 's' && choice[0] != 'p' && choice[0] != 's') {
+    //       alert(`
+    //       Invalid input! 
+    //       You entered: ${choice},
+    //       But you need: 'stone' or 'scissors' or 'paper'`);
+    //       getGame(lang);
+    //     }
+    //     return choice;
+    //   }
+    // }
   };
 
   // * игра
-  const getGame = () => {
+  const getGame = (lang = 'RUS') => {
+    console.log('lang: ', lang);
     totalGameCount++;
 
-    const userFigure = getUserFigure();
-
+    const userFigure = getUserFigure(lang);
+    console.log('lang: ', lang);
+// 1 камень 2 ножницы 3 бумага
     // * условие победы и увеличение счетчиков
-    // !!! Первый блок проверок
-    if (botFigure[0] === 'н' && userFigure[0] === 'б') {
+    if(userFigureNum === 1 && botFigureNum === 2 || userFigureNum === 2 && botFigureNum === 3) {
+      userWinCount++;
+      alert(`
+        Бот: ${botFigure}
+        Игрок: ${userFigure}
+        Игрок Победил!
+        `);
+    }
+    if(userFigureNum === 3 && botFigureNum === 2 || userFigureNum === 1 && botFigureNum === 3) {
       botWinCount++;
       alert(`
         Бот: ${botFigure}
         Игрок: ${userFigure}
-        Победил Бот!
+        Бот Победил!
         `);
     }
-
-    if (botFigure[0] === userFigure[0]) {
+    if (userFigureNum === botFigureNum) {
       drawCount++;
       alert(`
         Бот: ${botFigure}
@@ -82,61 +162,11 @@
         `);
     }
 
-    if (botFigure[0] === 'н' && userFigure[0] === 'к') {
-      userWinCount++;
-      alert(`
-        Бот: ${botFigure}
-        Игрок: ${userFigure}
-        Победил Игрок!
-        `);
-    }
-
-    // * =======
-    // !!! Второй блок проверок
-
-    if (botFigure[0] === 'к' && userFigure[0] === 'н') {
-      botWinCount++;
-      alert(`
-        Бот: ${botFigure}
-        Игрок: ${userFigure}
-        Победил Бот!
-        `);
-    }
-
-    if (botFigure[0] === 'к' && userFigure[0] === 'б') {
-      userWinCount++;
-      alert(`
-        Бот: ${botFigure}
-        Игрок: ${userFigure}
-        Победил Игрок!
-        `);
-    }
-
-    // * ===
-    // !!! Третий блок проверок
-    if (botFigure[0] === 'б' && userFigure[0] === 'к') {
-      botWinCount++;
-      alert(`
-        Бот: ${botFigure}
-        Игрок: ${userFigure}
-        Победил Бот!
-        `);
-    }
-
-    if (botFigure[0] === 'б' && userFigure[0] === 'н') {
-      userWinCount++;
-      alert(`
-        Бот: ${botFigure}
-        Игрок: ${userFigure}
-        Победил Игрок!
-        `);
-    }
-
     // * выход из игры или еще партия
 
     const nextGame = confirm('Еще разок?');
     if (nextGame) {
-      getGame();
+      getGame(lang);
     } else {
       alert(`Результат игр: 
                   Сыгранно игр: ${totalGameCount}
@@ -146,6 +176,23 @@
               `);
       totalGameCount = botWinCount = userWinCount = drawCount = 0;
     }
+
+    // !!! English
+    // if (lang === 'ENG') {
+    //   const nextGame = confirm('One more time?');
+    // if (nextGame) {
+    //   getGame(lang);
+    // } else {
+    //   alert(`Games result: 
+    //               Games played: ${totalGameCount}
+    //               Bot's wings: ${botWinCount}
+    //               User's wings: ${userWinCount}
+    //               Draws: ${drawCount}
+    //           `);
+    //   totalGameCount = botWinCount = userWinCount = drawCount = 0;
+    // }
+    // }
+    
   };
 
   window.RPS = getGame;
