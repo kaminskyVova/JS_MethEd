@@ -10,7 +10,7 @@
   let botWinCount = 0;
   let drawCount = 0;
 
-  // * рандомный ход бота
+  // * рандомный ход бота для РУС и ENG
   const getBotRandomFigure = (arr) => {
     const random = Math.floor(Math.random() * arr.length);
     if (arr[random] === 'камень' || arr[random] === 'stone') {
@@ -80,6 +80,7 @@
     if (lang === 'ENG') {
       let choice = prompt('What your choice?');
 
+      // !!! if EXIT
       if (choice === null) {
         const exit = confirm(`Are you sure you don't want to play?`);
 
@@ -96,8 +97,8 @@
         }
       }
 
-      // !!! is EXIT
-
+      
+      // * user choice
       if (choice != null) {
         choice.trim().toLowerCase();
 
