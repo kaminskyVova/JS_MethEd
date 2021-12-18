@@ -25,11 +25,12 @@
     return arr[random];
   };
 
-  // * выбор игрока
+  // * Русский выбор игрока 
   const getUserFigure = (lang = 'RUS') => {
     if (lang === 'RUS') {
       let choice = prompt('Что вы выбрали?');
 
+       // !!! если нажали отменить
       if (choice === null) {
         const exit = confirm('Вы уверены что не хотите играть?');
 
@@ -46,7 +47,6 @@
         }
       }
 
-      // !!! если нажали отменить
 
       if (choice != null) {
         choice.trim().toLowerCase();
@@ -76,7 +76,7 @@
       }
     }
 
-    // !!! English
+    // !!! English user choice
     if (lang === 'ENG') {
       let choice = prompt('What your choice?');
 
@@ -97,7 +97,6 @@
         }
       }
 
-      
       // * user choice
       if (choice != null) {
         choice.trim().toLowerCase();
@@ -130,7 +129,6 @@
 
   // * игра
   const getGame = (lang = 'RUS') => {
-    totalGameCount++;
 
     let botFigure = '';
 
@@ -149,6 +147,7 @@
         (userFigureNum === 1 && botFigureNum === 2) ||
         (userFigureNum === 2 && botFigureNum === 3)
       ) {
+        totalGameCount++;
         userWinCount++;
         alert(`
           Бот: ${botFigure}
@@ -160,6 +159,7 @@
         (userFigureNum === 3 && botFigureNum === 2) ||
         (userFigureNum === 1 && botFigureNum === 3)
       ) {
+        totalGameCount++;
         botWinCount++;
         alert(`
           Бот: ${botFigure}
@@ -169,6 +169,7 @@
       }
       if (userFigureNum === botFigureNum) {
         drawCount++;
+        totalGameCount++;
         alert(`
           Бот: ${botFigure}
           Игрок: ${userFigure}
@@ -177,18 +178,18 @@
       }
 
       // * выход из игры или еще партия
-
-      const nextGame = confirm('Еще разок?');
-      if (nextGame) {
-        getGame(lang);
-      } else {
-        alert(`Результат игр: 
-                    Сыгранно игр: ${totalGameCount}
-                    Побед Бота: ${botWinCount}
-                    Побед Игрока: ${userWinCount}
-                    Ничьих: ${drawCount}
-                `);
-        totalGameCount = botWinCount = userWinCount = drawCount = 0;
+      if (lang === 'RUS') {
+        const nextGame = confirm('Еще разок?');
+        if (nextGame) {
+          getGame(lang);
+        } else {
+          alert(`Результат игр: 
+                      Сыгранно игр: ${totalGameCount}
+                      Побед Бота: ${botWinCount}
+                      Побед Игрока: ${userWinCount}
+                      Ничьих: ${drawCount}
+                  `);
+        }
       }
     }
 
@@ -199,6 +200,7 @@
         (userFigureNum === 2 && botFigureNum === 3)
       ) {
         userWinCount++;
+        totalGameCount++;
         alert(`
             Bot: ${botFigure}
             User: ${userFigure}
@@ -210,6 +212,7 @@
         (userFigureNum === 1 && botFigureNum === 3)
       ) {
         botWinCount++;
+        totalGameCount++;
         alert(`
             Bot: ${botFigure}
             User: ${userFigure}
@@ -218,6 +221,7 @@
       }
       if (userFigureNum === botFigureNum) {
         drawCount++;
+        totalGameCount++;
         alert(`
             Bot: ${botFigure}
             User: ${userFigure}
@@ -226,17 +230,18 @@
       }
 
       // * Exit game or New game
-      const nextGame = confirm('One more time?');
-      if (nextGame) {
-        getGame(lang);
-      } else {
-        alert(`Games result: 
-                  Games played: ${totalGameCount}
-                  Bot's wings: ${botWinCount}
-                  User's wings: ${userWinCount}
-                  Draws: ${drawCount}
-              `);
-        totalGameCount = botWinCount = userWinCount = drawCount = 0;
+      if (lang === 'ENG') {
+        const nextGame = confirm('One more time?');
+        if (nextGame) {
+          getGame(lang);
+        } else {
+          alert(`Games result: 
+                    Games played: ${totalGameCount}
+                    Bot's wings: ${botWinCount}
+                    User's wings: ${userWinCount}
+                    Draws: ${drawCount}
+                `);
+        }
       }
     }
   };
