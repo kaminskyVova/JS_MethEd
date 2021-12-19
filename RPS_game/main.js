@@ -1,18 +1,19 @@
 'use strict';
 
 (() => {
-  const langChoice = prompt('Выберети язык игры. RUS или ENG')
-    .trim()
-    .toUpperCase();
-  let startGame = null;
+  let langChoice = prompt('Выберети язык игры. RUS или ENG');
+  if (langChoice != null) {
+    langChoice.trim().toUpperCase();
+  } else {
+    alert('Вы не можете начать игру если не выберете язык интерфейса!')
+    langChoice = prompt('Выберети язык игры. RUS или ENG');
+  }
 
   if (langChoice[0] === 'R') {
-    startGame = window.RPS('RUS');
+    window.RPS('RUS');
   }
 
   if (langChoice[0] === 'E') {
-    startGame = window.RPS('ENG');
+    window.RPS('ENG');
   }
-
-  startGame();
 })();
