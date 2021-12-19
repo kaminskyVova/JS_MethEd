@@ -1,4 +1,3 @@
 'use strict'
 
-const startGame = window.MRL()
-startGame()
+window.MRL()

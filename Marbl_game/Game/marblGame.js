@@ -5,11 +5,9 @@
   let botBallsCount = 5;
 
   const getGame = () => {
-
     // !!! Конец игры
     const endGame = () => {
       if (userBallsCount === 0) {
-        console.log('игра окончена');
         alert(`Победил Бот!!!
             количество шариков у бота: ${botBallsCount}
             количество шариков у игрока: ${userBallsCount}
@@ -26,15 +24,15 @@
 
     // !!! начало игры
     const startGame = () => {
-      if (userBallsCount > 0 && botBallsCount > 0) {
-        // !!! 1 раунд ставит игрок
-        console.log('===============');
-        alert(`ставит игрок угадывает бот`);
 
+      // !!! 1 раунд ставит игрок
+      if (userBallsCount > 0 && botBallsCount > 0) {
+        alert(`ставит игрок угадывает бот`);
         let userBetBalls = +prompt('Ваша ставка');
+
         // * проверка правельного ввода ставки
         if (
-          userBetBalls === null ||
+          userBetBalls === 0 ||
           isNaN(userBetBalls) ||
           userBetBalls > userBallsCount
         ) {
@@ -42,13 +40,19 @@
           userBetBalls = +prompt('Ваша ставка');
         }
 
-        console.log('userBetBalls: ', userBetBalls);
-        // я поставил шарики 2
+        // * exit
+        if (!userBetBalls) {
+          const exitChoice = confirm('Вы уверенны что хотите выйти из игры?');
+          if (exitChoice) {
+            alert('Ok Вы сдались и проиграли!');
+            return;
+          } else {
+            userBetBalls = +prompt('Ваша ставка');
+          }
+        }
+
         let botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
-        console.log('botBetBalls: ', botBetBalls);
-        // бот должен угадать чет не чет
         const botOddEvenChoice = Math.round(Math.random());
-        console.log('botOddEvenChoice: ', botOddEvenChoice);
 
         // !!! результат раунда
 
@@ -60,52 +64,71 @@
         } else {
           botBallsCount += userBetBalls;
           userBallsCount -= userBetBalls;
-        }
-        console.log('первый раунд итог');
-        console.log('userBallsCount: ', userBallsCount);
-        console.log('botBallsCount: ', botBallsCount);
-        console.log('==========');
+        };
 
         // !!! 2 раунд ставит бот
-        if (userBallsCount > 0 && botBallsCount > 0){
+        if (userBallsCount > 0 && botBallsCount > 0) {
           alert(`ставит бот угадывает игрок`);
-          console.log('============');
 
           botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
-          console.log('botBetBalls: ', botBetBalls);
-  
+
           //* ставка игрока
           userBetBalls = +prompt('Ваша ставка');
+
+        
           // * проверка правельного ввода ставки
           if (
-            userBetBalls === null ||
+            userBetBalls === 0 ||
             isNaN(userBetBalls) ||
             userBetBalls > userBallsCount
           ) {
             alert(`Вы вели не верные данные!`);
             userBetBalls = +prompt('Ваша ставка');
           }
-  
-          console.log('userBetBalls: ', userBetBalls);
-          //* игрок угадывает чет не чет
-          let userOddEvenChoice = prompt('Четное не четное').trim().toLowerCase();
-          // * проверка правельного ввода чет\не чет
-          if (
-            userOddEvenChoice === null &&
-            userOddEvenChoice[0] != 'ч' &&
-            userOddEvenChoice[0] != 'н' &&
-            typeof userOddEvenChoice[0] === 'string'
-          ) {
-            alert(`Нужно выбрать ЧЕТНОЕ или НЕ ЧЕТНОЕ`);
-            userOddEvenChoice = prompt('Четное или Не четное')
-              .trim()
-              .toLowerCase();
+
+          // * exit
+          if (!userBetBalls) {
+            const exitChoice = confirm('Вы уверенны что хотите выйти из игры?');
+            if (exitChoice) {
+              alert('Ok Вы сдались и проиграли!');
+              return;
+            } else {
+              userBetBalls = +prompt('Ваша ставка');
+            }
           }
-          userOddEvenChoice[0] === 'ч'
-            ? (userOddEvenChoice = 0)
-            : (userOddEvenChoice = 1);
-  
-          console.log('userOddEvenChoice: ', userOddEvenChoice);
+
+          //* игрок угадывает чет не чет
+          let userOddEvenChoice = prompt('Четное не четное');
+
+          if (!userOddEvenChoice) {
+            const exitChoice = confirm('Вы уверенны что хотите выйти из игры?');
+            if (exitChoice) {
+              alert('Ok Вы сдались и проиграли!');
+              return;
+            } else {
+              userOddEvenChoice = prompt('Четное не четное');
+            }
+          } else if (userOddEvenChoice) {
+            userOddEvenChoice = prompt('Четное не четное').trim().toLowerCase();
+          }
+
+          // * проверка правельного ввода чет\не чет
+          if (userBallsCount) {
+            if (
+              userOddEvenChoice === 0 &&
+              userOddEvenChoice[0] != 'ч' &&
+              userOddEvenChoice[0] != 'н' &&
+              typeof userOddEvenChoice[0] === 'string'
+            ) {
+              alert(`Нужно выбрать ЧЕТНОЕ или НЕ ЧЕТНОЕ`);
+              userOddEvenChoice = prompt('Четное или Не четное')
+                .trim()
+                .toLowerCase();
+            }
+            userOddEvenChoice[0] === 'ч'
+              ? (userOddEvenChoice = 0)
+              : (userOddEvenChoice = 1);
+          }
 
           // * победа игрока
           if (userOddEvenChoice === 0 && botBetBalls % 2 === 0) {
@@ -116,15 +139,12 @@
             botBallsCount += userBetBalls;
             userBallsCount -= userBetBalls;
           }
-          console.log('второй раунд итог');
-          console.log('userBallsCount: ', userBallsCount);
-          console.log('botBallsCount: ', botBallsCount);
         } else {
           console.log('игра окончена');
         }
-        startGame()
-      }else {
-        endGame()
+        startGame();
+      } else {
+        endGame();
         botBallsCount = userBallsCount = 0;
       }
     };
@@ -135,13 +155,12 @@
 
     function restart() {
       setTimeout(() => {
-        alert('Перезапуск игры')
-        startGame()
-      }, 2000)
+        alert('Перезапуск игры');
+        startGame();
+      }, 2000);
     }
 
-    restart()
-
+    restart();
   };
   window.MRL = getGame;
 })();
