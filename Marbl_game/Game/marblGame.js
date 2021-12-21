@@ -24,6 +24,8 @@
 
     // !!! начало игры
     const startGame = () => {
+      let botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
+      const botOddEvenChoice = Math.round(Math.random());
 
       // !!! 1 раунд ставит игрок
       if (userBallsCount > 0 && botBallsCount > 0) {
@@ -51,31 +53,28 @@
           }
         }
 
-        let botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
-        const botOddEvenChoice = Math.round(Math.random());
-
         // !!! результат раунда
 
         // * победа игрока
-        if (botOddEvenChoice === 0 && !userBetBalls % 2 === 0) {
+        if (
+          (botOddEvenChoice === 0 && !userBetBalls % 2 === 0) ||
+          (botOddEvenChoice === 1 && userBetBalls % 2 === 0)
+        ) {
           userBallsCount += botBetBalls;
           botBallsCount -= botBetBalls;
           //* победа бота
         } else {
           botBallsCount += userBetBalls;
           userBallsCount -= userBetBalls;
-        };
+        }
 
         // !!! 2 раунд ставит бот
         if (userBallsCount > 0 && botBallsCount > 0) {
           alert(`ставит бот угадывает игрок`);
 
-          botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
-
           //* ставка игрока
           userBetBalls = +prompt('Ваша ставка');
 
-        
           // * проверка правельного ввода ставки
           if (
             userBetBalls === 0 ||
@@ -106,11 +105,13 @@
               alert('Ok Вы сдались и проиграли!');
               return;
             } else {
-              userOddEvenChoice = prompt('Четное не четное');
+              // userOddEvenChoice = prompt('Четное не четное');
+              userOddEvenChoice.trim().toLowerCase();
             }
-          } else if (userOddEvenChoice) {
-            userOddEvenChoice = prompt('Четное не четное').trim().toLowerCase();
           }
+          // else if (userOddEvenChoice) {
+          //   userOddEvenChoice = prompt('Четное не четное').trim().toLowerCase();
+          // }
 
           // * проверка правельного ввода чет\не чет
           if (userBallsCount) {
@@ -131,7 +132,10 @@
           }
 
           // * победа игрока
-          if (userOddEvenChoice === 0 && botBetBalls % 2 === 0) {
+          if (
+            (userOddEvenChoice === 0 && botBetBalls % 2 === 0) ||
+            (userOddEvenChoice === 1 && !botBetBalls % 2 === 0)
+          ) {
             userBallsCount += botBetBalls;
             botBallsCount -= botBetBalls;
             //* победа бота
@@ -140,7 +144,7 @@
             userBallsCount -= userBetBalls;
           }
         } else {
-          console.log('игра окончена');
+          return;
         }
         startGame();
       } else {
