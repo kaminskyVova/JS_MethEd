@@ -24,11 +24,13 @@
 
     // !!! начало игры
     const startGame = () => {
-      let botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
-      const botOddEvenChoice = Math.round(Math.random());
-
       // !!! 1 раунд ставит игрок
       if (userBallsCount > 0 && botBallsCount > 0) {
+        let botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
+        console.log('botBetBalls: ', botBetBalls);
+        const botOddEvenChoice = Math.round(Math.random());
+        console.log('botOddEvenChoice: ', botOddEvenChoice);
+
         alert(`ставит игрок угадывает бот`);
         let userBetBalls = +prompt('Ваша ставка');
 
@@ -62,14 +64,23 @@
         ) {
           userBallsCount += botBetBalls;
           botBallsCount -= botBetBalls;
+          alert(`Ures win round you have totalBalls: ${userBallsCount}`);
           //* победа бота
         } else {
           botBallsCount += userBetBalls;
           userBallsCount -= userBetBalls;
+          alert(`Bot win round you have totalBalls: ${userBallsCount}`);
         }
+        console.log('userBetBalls: ', userBetBalls);
+        console.log('botBetBalls: ', botBetBalls);
+        console.log('userBallsCount: ', userBallsCount);
+        console.log('botBallsCount: ', botBallsCount);
+        console.log('============1================');
 
         // !!! 2 раунд ставит бот
         if (userBallsCount > 0 && botBallsCount > 0) {
+          botBetBalls = Math.round(Math.random() * (botBallsCount - 1) + 1);
+          console.log('botBetBalls: ', botBetBalls);
           alert(`ставит бот угадывает игрок`);
 
           //* ставка игрока
@@ -105,13 +116,9 @@
               alert('Ok Вы сдались и проиграли!');
               return;
             } else {
-              // userOddEvenChoice = prompt('Четное не четное');
               userOddEvenChoice.trim().toLowerCase();
             }
           }
-          // else if (userOddEvenChoice) {
-          //   userOddEvenChoice = prompt('Четное не четное').trim().toLowerCase();
-          // }
 
           // * проверка правельного ввода чет\не чет
           if (userBallsCount) {
@@ -138,18 +145,22 @@
           ) {
             userBallsCount += botBetBalls;
             botBallsCount -= botBetBalls;
+            alert(`Ures win round you have totalBalls: ${userBallsCount}`);
             //* победа бота
           } else {
             botBallsCount += userBetBalls;
             userBallsCount -= userBetBalls;
+            alert(`Bot win round you have totalBalls: ${userBallsCount}`);
           }
+          console.log('userBetBalls: ', userBetBalls);
+          console.log('botBetBalls: ', botBetBalls);
+          console.log('userBallsCount: ', userBallsCount);
+          console.log('botBallsCount: ', botBallsCount);
+          console.log('=============2===============');
         } else {
-          return;
+          endGame();
         }
         startGame();
-      } else {
-        endGame();
-        botBallsCount = userBallsCount = 0;
       }
     };
     startGame();
