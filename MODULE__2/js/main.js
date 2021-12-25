@@ -20,6 +20,7 @@ items[0].before(items[3]);
 
 // порядок содержимого списков
 const propsList = document.querySelectorAll('.props__list');
+console.log('propsList: ', propsList);
 
 const propsItem = [];
 
@@ -28,10 +29,12 @@ propsList.forEach((item) => {
   propsItem.push(li);
   return propsItem;
 });
+console.log('propsItem: ', propsItem);
 
 propsItem[3][3].after(propsItem[1][3]);
-propsItem[1][8].after(propsItem[5][8]);
 propsItem[1][8].after(propsItem[5][9]);
+propsItem[1][8].after(propsItem[5][8]);
+
 
 const thirdItemList = propsList[2].cloneNode(true)
 const fourthItemList = propsList[4].cloneNode(true)
